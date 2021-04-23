@@ -16,7 +16,7 @@ public interface CartController {
 			                  HttpServletRequest request, HttpServletResponse response)  throws Exception;
 //	public ModelAndView removeCartGoods(@RequestParam("cart_id") int cart_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
 
-	public @ResponseBody String addProductInCart(String product_code, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody String addProductInCart(String product_code, int cart_product_qty, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
 
 	

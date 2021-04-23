@@ -27,6 +27,12 @@ public class ProductServiceImpl implements ProductService {
 	public int addNewProduct(Map<String, Object> articleMap) throws Exception {
 		return productDAO.insertNewProduct(articleMap);
 	}
+
+	@Override
+	public ProductVO viewProduct(String product_code) throws Exception {
+		ProductVO productVO = productDAO.selectOneProduct(product_code);
+		return productVO;
+	}
 	
 
 }

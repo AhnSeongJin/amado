@@ -12,5 +12,7 @@ public interface ProductDAO {
 	public List<ProductVO> selectProductList() throws DataAccessException;
 
 	public int insertNewProduct(Map<String, Object> articleMap) throws DataAccessException;
+	
+	public ProductVO selectOneProduct(String product_code) throws DataAccessException;
 
 }

@@ -10,6 +10,8 @@ public interface ProductService {
 	public List<ProductVO> productList() throws Exception;
 
 	public int addNewProduct(Map<String, Object> articleMap) throws Exception;
+	
+	public ProductVO viewProduct(String product_code) throws Exception;
 
 	
 

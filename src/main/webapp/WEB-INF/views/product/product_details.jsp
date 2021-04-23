@@ -125,7 +125,10 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-7">
-                        <div class="single_product_thumb">
+                    	<div class="single_product">
+                    		<img src="${contextPath }/download.do?product_code=${productVO.product_code}&imageFileName=${productVO.image_file_name}">
+                    	</div>
+                        <%-- <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
@@ -160,16 +163,16 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --%>
                     </div>
                     <div class="col-12 col-lg-5">
                         <div class="single_product_desc">
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">$180</p>
+                                <p class="product-price">$${productVO.product_price }</p>
                                 <a href="product-details.html">
-                                    <h6>White Modern Chair</h6>
+                                    <h6>${product_code }</h6>
                                 </a>
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -193,7 +196,7 @@
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form class="cart clearfix" method="post">
+                            <div class="cart clearfix">
                                 <div class="cart-btn d-flex mb-50">
                                     <p>Qty</p>
                                     <div class="quantity">
@@ -202,8 +205,8 @@
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
-                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
-                            </form>
+                                <button type="button" name="addtocart" class="btn amado-btn" onclick="add_cart('${productVO.product_code}');">Add to cart</button>
+                            </div>
 
                         </div>
                     </div>
@@ -290,6 +293,88 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
+    
+    <!-- Modal -->
+	<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">장바구니 담기</h5>
+	        <button type="button" data-dismiss="modal" aria-label="Close">
+	        	<img src="${contextPath}/resources/img/core-img/close.png" id="close" />
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<p class="text-center">선택한 상품이 장바구니에 상품이 담겼습니다.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">쇼핑 계속하기</button> -->
+	        <button type="button" class="btn btn-secondary">장바구니 이동</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">쇼핑 계속하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    
+    <!-- Modal -->
+	<div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">장바구니 담기</h5>
+	        <button type="button" data-dismiss="modal" aria-label="Close">
+	        	<img src="${contextPath}/resources/img/core-img/close.png" id="close" />
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<p class="text-center">이미 장바구니에 등록된 상품입니다.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">쇼핑 계속하기</button> -->
+	        <button type="button" class="btn btn-secondary"><a href="${contextPath }/cart/cart.do">장바구니 이동</a></button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">쇼핑 계속하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    
+    <script>
+	 // ajax 이용하여 카트에 담기
+		function add_cart(product_code) {
+		 console.log('상품코드: ',product_code)
+		 	var qty = document.getElementById('qty').value;
+			if(${isLogOn == true && member != null }){
+				$.ajax({
+	    			type: "post",
+	    			async: true, //false인 경우 동기식으로 처리한다.
+	    			url: "${contextPath}/cart/addProductInCart.do",
+	    			data: {
+	    				product_code: product_code,
+	    				cart_product_qty : qty
+	    				},
+	    			success: function(data, textStatus) {
+	    				if(data.trim() == 'add_success') {
+	    					//팝업창을 이미지 원본사이즈로 띄우기
+	    					//imagePopup('open');
+	    					$('#successModal').modal('show');
+	    				} else if(data.trim() == 'already_existed') {
+	    					//alert("이미 카트에 등록된 상품입니다.");
+	    					$('#failureModal').modal('show');
+	    				}
+	    			},
+	    			error: function(data, textStatus) {
+	    				alert("에러가 발생했습니다."+data);
+	    			},
+	    			complete: function(data, textStatus) {
+	    				//alert("작업을 완료했습니다.");
+	    			}
+	    		})
+			} else {
+				alert("로그인후 장바구니에 담을 수 있습니다.");
+			}
+		} //end ajax
+    	
+    </script>
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="${contextPath}/resources/js/jquery/jquery-2.2.4.min.js"></script>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.cart">
+	<resultMap type="CartVO" id="cartResult">
+		<result property="cart_id" column="cart_id" />
+		<result property="product_code" column="product_code" />
+		<result property="id" column="id" />
+		<result property="cart_product_qty" column="cart_product_qty" />
+		<result property="cre_date" column="cre_date" />
+	</resultMap>
+	
+	<resultMap id="productResult" type="productVO">
+		<result property="product_code" column="product_code" />
+		<result property="product_name" column="product_name" />
+		<result property="product_price" column="product_price" />
+		<result property="image_file_name" column="image_file_name" />
+		<result property="reg_date" column="reg_date" />
+	</resultMap>
+	
+<!-- 	<resultMap id="joinResult" type="joinVO">
+		<collection property="cart" resultMap="cartResult"/>
+		<collection property="product" resultMap="productResult"/>
+	</resultMap> -->
+	
+	<select id="selectCartList"  parameterType="cartVO"  resultMap="cartResult"   >
+	    <![CDATA[
+			select * from cart
+			where id=#{id} 
+		]]>
+	</select>
+	
+<!-- 	<select id="selectProductList" resultMap="joinResult" parameterType="java.util.List">
+      <![CDATA[
+			select c.*, p.image_file_name
+			from cart as c left join product as p
+			on c.product_code = p.product_code
+			where c.id = #{id}
+			order by c.cart_id;
+      ]]>
+	</select> -->
+	
+	<select id="selectProductList" resultMap="productResult" parameterType="java.util.List">
+      <![CDATA[
+			select c.*, p.image_file_name, p.product_name, p.product_price
+			from cart as c left join product as p
+			on c.product_code = p.product_code
+			where c.id = #{id}
+			order by c.cart_id;
+      ]]>
+	</select>
+	
+	<!-- <select id="selectproductList" resultMap="cartResult" parameterType="java.util.Map">
+      <![CDATA[
+          select g.*,d.fileName from t_shopping_goods g, t_goods_detail_image d
+          where g.goods_id=d.goods_id
+          and d.filetype='main_image'
+           and g.goods_id in
+      ]]>
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item.goods_id}
+		</foreach>
+		order by g.goods_creDate desc
+	</select> -->
+	
+	<!-- 카트에 상품 중복확인 중복O=true, 중복X=false -->
+	<!-- oracle: decode / mysql: if, case when then -->
+	<select id="selectCountInCart" resultType="String" parameterType="cartVO">
+	    <![CDATA[
+		    select if(count(*)=0, 'false', 'true') as 'check'
+		    from cart
+			where product_code=#{product_code}
+			  and id=#{id} 
+    	]]>
+	</select>
+	
+	<!-- 카트아이디(번호) 생성 -->
+	<!-- oracle: nvl / mysql: ifnull -->
+	<select id="selectMaxCartId" resultType="int">
+	    <![CDATA[
+			select ifnull(max(cart_id), 0) + 1 from cart
+    	]]>
+	</select>
+	
+	<insert id="insertProductInCart" parameterType="cartVO">
+	    <![CDATA[
+		    	insert into cart(cart_id,
+		    	                 product_code,
+		    	                 id,
+		    	                 cart_product_qty)
+		        		values(#{cart_id},
+    							#{product_code},
+    							#{id},
+    							#{cart_product_qty})
+    	]]>
+	</insert>
+	
+	<update id="updateCartProductQty" parameterType="cartVO">
+		<![CDATA[
+			update cart
+			set cart_product_qty = #{cart_product_qty}
+			where id = #{id} and cart_id = #{cart_id}
+		]]>
+	</update>
+	
+
+</mapper>

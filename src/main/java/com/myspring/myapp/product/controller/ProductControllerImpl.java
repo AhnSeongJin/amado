@@ -113,6 +113,18 @@ public class ProductControllerImpl implements ProductController {
 		return resEnt;
 	}
 	
+	@Override
+	@RequestMapping(value = "/product_details", method = RequestMethod.GET)
+	public ModelAndView viewProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("productController: /product/product_details");
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		String product_code = request.getParameter("product_code");
+		productVO = productService.viewProduct(product_code);
+		mav.addObject("productVO", productVO);
+		return mav;
+	}
 	
 	
 	
@@ -125,7 +137,7 @@ public class ProductControllerImpl implements ProductController {
 	
 	
 	
-	
+
 	// 한개 이미지 업로드하기
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		String imageFileName= null;

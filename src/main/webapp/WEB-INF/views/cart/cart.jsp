@@ -306,7 +306,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	    		},
 	    		complete : function(data, textStatus) {
 	    			//alert("작업을완료 했습니다");
-	    			
 	    		}
 	    	}); //end ajax	
 	    	

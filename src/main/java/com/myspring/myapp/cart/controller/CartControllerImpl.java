@@ -52,7 +52,7 @@ public class CartControllerImpl extends BaseController implements CartController
 	
 	@Override
 	@RequestMapping(value="/addProductInCart.do" ,method = RequestMethod.POST,produces = "application/text; charset=utf8")
-	public  @ResponseBody String addProductInCart(@RequestParam("product_code") String product_code,
+	public  @ResponseBody String addProductInCart(@RequestParam("product_code") String product_code, @RequestParam(value="cart_product_qty", required=false, defaultValue = "1") int cart_product_qty,
 			                    HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("member");
@@ -63,8 +63,8 @@ public class CartControllerImpl extends BaseController implements CartController
 		//카트 등록전에 이미 등록된 제품인지 판별한다.
 		cartVO.setProduct_code(product_code);
 		cartVO.setId(id);
-		
-		
+		//RequestParam에 required=false로 해서 값이 안넘어 올 경우 defaultValue="1"
+		cartVO.setCart_product_qty(cart_product_qty);
 		boolean isAreadyExisted=cartService.findCartProduct(cartVO);
 		System.out.println("isAreadyExisted:"+isAreadyExisted);
 		if(isAreadyExisted==true){ //중복O

@@ -27,4 +27,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.insert("mapper.product.insertNewProduct", articleMap);
 	}
 
+	@Override
+	public ProductVO selectOneProduct(String product_code) throws DataAccessException {
+		ProductVO productVO = sqlSession.selectOne("mapper.product.selectOneProduct", product_code);
+		return productVO;
+	}
+
 }

@@ -80,7 +80,7 @@
                 <ul>
                     <li class="active"><a href="${contextPath}/index.do">Home</a></li>
                     <li><a href="${contextPath}/product/shop.do">Shop</a></li>
-                    <li><a href="${contextPath}/product-details.do">Product</a></li>
+                    <li><a href="${contextPath}/product/product_details.do">Product</a></li>
                     <li><a href="${contextPath}/cart/cart.do">Cart</a></li>
                     <li><a href="${contextPath}/checkout.do">Checkout</a></li>
                 </ul>
