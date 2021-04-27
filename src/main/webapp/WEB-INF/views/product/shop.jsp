@@ -58,6 +58,47 @@
     			alert("로그인후 장바구니에 담을 수 있습니다.");
     		}
     	}
+    	
+    	//이전 버튼 이벤트
+    	function fn_prev(page, range, rangeSize) {
+    		var page = ((range - 2) * rangeSize) + 1;
+    		var range = range - 1;		
+
+    		var url = "${contextPath}/product/shop.do";
+    		url = url + "?page=" + page;
+    		url = url + "&range=" + range;
+
+    		location.href = url;
+    	}
+
+      //페이지 번호 클릭
+    	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+    		var url = "${contextPath}/product/shop.do";
+    		url = url + "?page=" + page;
+    		url = url + "&range=" + range;
+
+    		location.href = url;	
+    	}
+
+    	//다음 버튼 이벤트
+    	function fn_next(page, range, rangeSize) {
+    		var page = parseInt((range * rangeSize)) + 1;
+    		var range = parseInt(range) + 1;
+
+    		var url = "${contextPath}/product/shop.do";
+    		url = url + "?page=" + page;
+    		url = url + "&range=" + range;		
+
+    		location.href = url;
+    	}
+    	
+    	function fn_viewProduct(select) {
+    		//var select = document.getElementById('viewProduct').value;
+    		console.log(select);
+    		
+    		location.href = "${contextPath}/product/shop.do?viewProduct="+select;
+    	}
+    	    	
 
     </script>
 
@@ -241,7 +282,7 @@
                         <div class="product-topbar d-xl-flex align-items-end justify-content-between">
                             <!-- Total Products -->
                             <div class="total-products">
-                                <p>Showing 1-8 0f 25</p>
+                                
                                 <div class="view d-flex">
                                     <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -262,11 +303,12 @@
                                 <div class="view-product d-flex align-items-center">
                                     <p>View</p>
                                     <form action="#" method="get">
-                                        <select name="select" id="viewProduct">
-                                            <option value="value">12</option>
-                                            <option value="value">24</option>
-                                            <option value="value">48</option>
-                                            <option value="value">96</option>
+                                        <select name="select" id="viewProduct" onchange="fn_viewProduct(this.value);">
+                                        	<option>${pagination.listSize }개</option>
+                                            <option value="6">6</option>
+                                            <option value="12">12</option>
+                                            <option value="18">18</option>
+                                            <option value="24">24</option>
                                         </select>
                                     </form>
                                 </div>
@@ -277,6 +319,7 @@
 
                 <div class="row">
                 
+                	<!-- 상품 forEach -->
 					<c:forEach var="product" items="${productList }" varStatus="productNum">
 						<!-- Single Product Area -->
 	                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
@@ -294,9 +337,9 @@
 	                                <!-- Product Meta Data -->
 	                                <div class="product-meta-data">
 	                                    <div class="line"></div>
-	                                    <p class="product-price">${product.product_price }</p>
+	                                    <p class="product-price">${product.product_price }$</p>
 	                                    <a href="product-details.html">
-	                                        <h6><a href="${contextPath }/product/product_details?product_code=${product.product_code }">${product.product_name }</a></h6>
+	                                        <h4><a href="${contextPath }/product/product_details?product_code=${product.product_code }">${product.product_name }</a></h4>
 	                                    </a>
 	                                </div>
 	                                <!-- Ratings & Cart -->
@@ -318,21 +361,35 @@
 	                    </div>
 					</c:forEach>
 					
-                </div> 
-
+                </div>
+                
+                <!-- 페이지 번호 -->
                 <div class="row">
                     <div class="col-12">
-                        <!-- Pagination -->
                         <nav aria-label="navigation">
                             <ul class="pagination justify-content-end mt-50">
-                                <li class="page-item active"><a class="page-link" href="#">01.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">04.</a></li>
+                                <c:if test="${pagination.prev}">
+								<li class="page-item"><a class="page-link" href="#"
+									onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+								</c:if>
+								
+								<!-- 페이지 번호 forEach -->
+								<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}"
+									var="idx">
+									<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+										<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+									</li>
+								</c:forEach>
+						
+								<c:if test="${pagination.next}">
+									<li class="page-item">
+									<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+								</c:if>
                             </ul>
                         </nav>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

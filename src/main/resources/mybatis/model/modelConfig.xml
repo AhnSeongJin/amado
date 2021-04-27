@@ -7,5 +7,6 @@
 		<typeAlias type="com.myspring.myapp.member.vo.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.myspring.myapp.product.vo.ProductVO" alias="productVO" />
 		<typeAlias type="com.myspring.myapp.cart.vo.CartVO" alias="cartVO" />
+		<typeAlias type="com.myspring.myapp.common.pagination.Pagination" alias="pagination" />
 	</typeAliases>
 </configuration>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.myspring.myapp.common.pagination.Pagination;
 import com.myspring.myapp.product.vo.ProductVO;
 
 @Repository("boardDAO")
@@ -31,6 +32,19 @@ public class ProductDAOImpl implements ProductDAO {
 	public ProductVO selectOneProduct(String product_code) throws DataAccessException {
 		ProductVO productVO = sqlSession.selectOne("mapper.product.selectOneProduct", product_code);
 		return productVO;
+	}
+
+	//전체 상품 개수 구하기
+	@Override
+	public int selectProductListCnt() throws DataAccessException {
+		int listCnt = sqlSession.selectOne("mapper.product.selectProductListCnt");
+		return listCnt;
+	}
+
+	//상품 리스트 구하기
+	@Override
+	public List<ProductVO> getProductList(Pagination pagination) throws DataAccessException {
+		return sqlSession.selectList("mapper.product.getProductList", pagination);
 	}
 
 }

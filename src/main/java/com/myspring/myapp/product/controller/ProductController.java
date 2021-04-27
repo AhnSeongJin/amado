@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface ProductController {
 
-	public ModelAndView shop(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//public ModelAndView shop(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView productAdd(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
@@ -17,5 +17,11 @@ public interface ProductController {
 			throws Exception;
 	
 	public ModelAndView viewProduct(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	// 상품 페이징
+	public ModelAndView getProductList(int page, int range, int viewProduct, HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
+	
+	
 
 }

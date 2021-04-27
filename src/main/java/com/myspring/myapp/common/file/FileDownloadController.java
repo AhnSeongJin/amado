@@ -20,7 +20,7 @@ public class FileDownloadController {
 	protected void download(@RequestParam("imageFileName") String imageFileName,
 							@RequestParam("product_code") String product_code,
 			                 HttpServletResponse response)throws Exception {
-		System.out.println("code확인: "+ product_code);
+		//System.out.println("FrileDownloadController/product_code확인: "+ product_code);
 		OutputStream out = response.getOutputStream();
 		String downFile = ARTICLE_IMAGE_REPO + "\\" +product_code+"\\"+ imageFileName;
 		File file = new File(downFile);

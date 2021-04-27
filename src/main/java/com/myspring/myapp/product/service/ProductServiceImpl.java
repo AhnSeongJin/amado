@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myspring.myapp.common.pagination.Pagination;
 import com.myspring.myapp.product.dao.ProductDAO;
 import com.myspring.myapp.product.vo.ProductVO;
 
@@ -33,6 +34,20 @@ public class ProductServiceImpl implements ProductService {
 		ProductVO productVO = productDAO.selectOneProduct(product_code);
 		return productVO;
 	}
+
+	//전체 상품 개수 구하기
+	@Override
+	public int getBoardListCnt() throws Exception {
+		int listCnt = productDAO.selectProductListCnt();
+		return listCnt;
+	}
+
+	//상품 리스트 구하기
+	@Override
+	public List<ProductVO> getProductList(Pagination pagination) throws Exception {
+		return productDAO.getProductList(pagination);
+	}
+	
 	
 
 }

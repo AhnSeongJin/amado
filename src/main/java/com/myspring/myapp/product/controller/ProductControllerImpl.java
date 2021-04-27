@@ -13,17 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.myapp.common.pagination.Pagination;
 import com.myspring.myapp.product.service.ProductService;
 import com.myspring.myapp.product.vo.ProductVO;
 
@@ -37,14 +38,37 @@ public class ProductControllerImpl implements ProductController {
 	private ProductVO productVO;
 	
 	//리스트 보기(페이징X), 상품리스트
+//	@Override
+//	@RequestMapping(value = "/shop.do", method = {RequestMethod.GET, RequestMethod.POST})
+//	public ModelAndView shop(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		String viewName = (String)request.getAttribute("viewName");
+//		List productList = productService.productList();
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("productList", productList);
+//		System.out.println("productController: "+viewName);
+//		return mav;
+//	}
+	
+	//리스트 보기(페이징 처리), 상품리스트
 	@Override
-	@RequestMapping(value = "/shop.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView shop(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/shop.do", method = RequestMethod.GET)
+	public ModelAndView getProductList(@RequestParam(value="page", required=false, defaultValue="1") int page, @RequestParam(value="range", required=false, defaultValue="1") int range, @RequestParam(value="viewProduct", required=false, defaultValue="6") int viewProduct, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		List productList = productService.productList();
+		
+		//전체 상품 개수
+		int listCnt = productService.getBoardListCnt(); System.out.println("페이지에서 넘어온 값: "+page+" "+range);
+		
+		//Pagination 객체 생성, 페이지당 상품 몇개씩 볼건지 값 받음 default=6
+		Pagination pagination = new Pagination(viewProduct);
+		//최초 페이지 이동시는 defualtValue 설정값으로
+		pagination.pageInfo(page, range, listCnt);
+		
+		List<ProductVO> productList = productService.getProductList(pagination);
+		
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("productList", productList);
-		System.out.println("productController: "+viewName);
+		mav.addObject("pagination", pagination); //페이지 정보
+		mav.addObject("productList", productList); //상품 정보
+		
 		return mav;
 	}
 	
@@ -113,6 +137,7 @@ public class ProductControllerImpl implements ProductController {
 		return resEnt;
 	}
 	
+	//상품 상세보기
 	@Override
 	@RequestMapping(value = "/product_details", method = RequestMethod.GET)
 	public ModelAndView viewProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -127,17 +152,8 @@ public class ProductControllerImpl implements ProductController {
 	}
 	
 	
+	/* ========= 아래는 사용 메소드들 ========= */
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	// 한개 이미지 업로드하기
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		String imageFileName= null;
@@ -164,8 +180,7 @@ public class ProductControllerImpl implements ProductController {
 		return imageFileName;
 	}
 	
-	
-	
+	//페이지 이름 얻는 메소드
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
 		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
@@ -191,10 +206,7 @@ public class ProductControllerImpl implements ProductController {
 		if (viewName.indexOf(".") != -1) {
 			viewName = viewName.substring(0, viewName.lastIndexOf("."));
 		}
-		if (viewName.lastIndexOf("/") != -1) {
-			//getViewName()�쓣 �샇異쒗븷 寃쎌슦 fileName.lastIndexOf("/",1)�쓣 �궗�슜�빐
-			//JSP媛� 吏��젙�맂 �뤃�뜑 �씠由꾩뿉 �빐�떦�븯�뒗 泥� 踰덉㎏ �슂泥�遺��꽣 媛��졇�삩�떎.
-			//ex))	member/listmembers.do濡� �슂泥��븷 寃쎌슦 member/listMember瑜� �뙆�씪 �씠由꾩쑝濡� 媛��졇�샂
+		if (viewName.lastIndexOf("/") != -1) {			
 			viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
 		}
 		return viewName;

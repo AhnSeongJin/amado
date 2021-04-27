@@ -32,4 +32,30 @@
 		]]>
 	</select>
 	
+	<select id="selectPaginList" resultMap="productResult">
+		<![CDATA[
+			SELECT *
+			FROM (
+				select product_code, product_name, product_price, image_file_name
+				from product)
+		]]>
+	</select>
+	
+	<!-- 전체 상품수 -->
+	<select id="selectProductListCnt" resultType="int">
+		<![CDATA[
+			SELECT count(*) as listCnt FROM product
+		]]>
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="getProductList" resultMap="productResult">
+	    <![CDATA[
+	      SELECT product_code, product_name, product_price, image_file_name
+	      FROM product
+	      ORDER BY reg_date DESC
+	      LIMIT #{startList}, #{listSize}
+	    ]]>
+	</select>
+	
 </mapper>
