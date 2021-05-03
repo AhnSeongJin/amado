@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.myspring.myapp.common.pagination.Pagination;
 import com.myspring.myapp.product.vo.ProductVO;
 
-@Repository("boardDAO")
+@Repository("productDAO")
 public class ProductDAOImpl implements ProductDAO {
 	@Autowired
 	private SqlSession sqlSession;

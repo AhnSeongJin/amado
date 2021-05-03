@@ -18,7 +18,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Home</title>
+    <title>Amado - Furniture Ecommerce Template | Product Details</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="${contextPath}/resources/img/core-img/favicon.ico">
@@ -79,37 +79,19 @@
             <nav class="amado-nav">
                 <ul>
                     <li class="active"><a href="${contextPath}/index.do">Home</a></li>
-                    <li><a href="${contextPath}/product/shop.do">Shop</a></li>
-                    <li><a href="${contextPath}/board/boardList.do">Board</a></li>
-                    <li><a href="${contextPath}/cart/cart.do">Cart</a></li>
+                    <li><a href="${contextPath}/shop.do">Shop</a></li>
+                    <li><a href="${contextPath}/product-details.do">Product</a></li>
+                    <li><a href="${contextPath}/cart.do">Cart</a></li>
                     <li><a href="${contextPath}/checkout.do">Checkout</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
-                <!-- <a href="#" class="btn amado-btn mb-15">%Discount%</a> -->
-                <%-- <c:choose>
-                	<c:when test="${isLogOn == true && member != null && member.id == admin }">
-                		<a href="${contextPath}/product/product-add.do" class="btn amado-btn mb-15">상품추가</a>
-                	</c:when>
-                	<
-                </c:choose> --%>
-                <c:if test="${isLogOn == true && member != null && member.id == 'admin' }">
-                	 <a href="${contextPath}/product/product-add.do" class="btn amado-btn mb-15">상품추가</a>
-                </c:if>
+                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
                 <a href="#" class="btn amado-btn active">New this week</a>
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-            	<c:choose>
-            		<c:when test="${isLogOn == true && member != null }">
-            			<h4 class="text-center">환영합니다. </br>${member.id}님</h4>
-            			<a href="${contextPath }/member/logout.do"><img src="${contextPath}/resources/img/core-img/logout.png" alt=""> 로그아웃 </a>
-            		</c:when>
-            		<c:otherwise>
-            			<a href="${contextPath }/member/login.do"><img src="${contextPath}/resources/img/core-img/login.png" alt=""> 로그인 </a>
-            		</c:otherwise>
-            	</c:choose>
                 <a href="cart.html" class="cart-nav"><img src="${contextPath}/resources/img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                 <a href="#" class="fav-nav"><img src="${contextPath}/resources/img/core-img/favorites.png" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="${contextPath}/resources/img/core-img/search.png" alt=""> Search</a>
@@ -124,129 +106,53 @@
         </header>
         <!-- Header Area End -->
 
-        <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix">
+        <!-- Product Details Area Start -->
+        <div class="single-product-area section-padding-100 clearfix">
+            <div class="container-fluid">
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Furniture</a></li>
+                                <li class="breadcrumb-item"><a href="#">Chairs</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">white modern chair</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/2.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Minimalistic Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/3.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 180,000원</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/4.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 180,000원</p>
-                            <h4>Night Stand</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/5.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 18,000원</p>
-                            <h4>Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/6.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 320,000원</p>
-                            <h4>Small Table</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/7.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 318,000원</p>
-                            <h4>Metallic Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/8.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 318,000원</p>
-                            <h4>Modern Rocking Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="${contextPath}/resources/img/bg-img/9.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From 318,000원</p>
-                            <h4>Home Deco</h4>
-                        </div>
-                    </a>
-                </div>
+                <div class="row">
+		            <div class="col-12">
+		              
+		              <form action="">
+		              	<table class="table text-center">
+			              	<tr>
+								<td class="list">글번호</td>
+								<td><input type="text" value="${boardVO.boardSeq }" disabled /> <input type="hidden" name="articleNO" value="${boardVO.boardSeq}" /></td>
+							</tr>
+							<tr>
+								<td class="list">작성자 아이디</td>
+								<td><input type=text value="${boardVO.id }" name="writer" disabled /></td>
+							</tr>
+							<tr>
+								<td class="list">제목</td>
+								<td><input type=text value="${boardVO.boardTitle }" name="title" id="i_title" disabled /></td>
+							</tr>
+							<tr>
+								<td class="list">내용</td>
+								<td><textarea rows="20" cols="60" name="content" id="i_content" disabled />${boardVO.boardContent }</textarea></td>
+							</tr>
+			              </table>
+		              </form>
+		                
+		            </div>                    
+		        </div>
+		        
             </div>
         </div>
-        <!-- Product Catagories Area End -->
+        <!-- Product Details Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
@@ -326,6 +232,42 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- ##### Footer Area End ##### -->
+    
+    <script>
+		//이전 버튼 이벤트
+		function fn_prev(page, range, rangeSize) {
+			var page = ((range - 2) * rangeSize) + 1;
+			var range = range - 1;		
+	
+			var url = "${contextPath}/board/boardList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+	
+			location.href = url;
+		}
+	
+	  	//페이지 번호 클릭
+		function fn_pagination(page, range, rangeSize, searchType, keyword) {
+			var url = "${contextPath}/board/boardList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+	
+			location.href = url;	
+		}
+	
+		//다음 버튼 이벤트
+		function fn_next(page, range, rangeSize) {
+			var page = parseInt((range * rangeSize)) + 1;
+			var range = parseInt(range) + 1;
+	
+			var url = "${contextPath}/board/boardList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;		
+	
+			location.href = url;
+		}
+    	
+    </script>
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="${contextPath}/resources/js/jquery/jquery-2.2.4.min.js"></script>

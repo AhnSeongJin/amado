@@ -44,7 +44,7 @@
 	<!-- 전체 상품수 -->
 	<select id="selectProductListCnt" resultType="int">
 		<![CDATA[
-			SELECT count(*) as listCnt FROM product
+			SELECT count(*) AS listCnt FROM product
 		]]>
 	</select>
 	

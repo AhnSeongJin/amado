@@ -92,6 +92,7 @@
     		location.href = url;
     	}
     	
+    	//onchange 한페이지에서 볼 상품 개수 선택
     	function fn_viewProduct(select) {
     		//var select = document.getElementById('viewProduct').value;
     		console.log(select);
@@ -363,14 +364,14 @@
 					
                 </div>
                 
-                <!-- 페이지 번호 -->
+                <!-- start 페이지 번호 선택 -->
                 <div class="row">
                     <div class="col-12">
                         <nav aria-label="navigation">
                             <ul class="pagination justify-content-end mt-50">
                                 <c:if test="${pagination.prev}">
 								<li class="page-item"><a class="page-link" href="#"
-									onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+									onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">이전</a></li>
 								</c:if>
 								
 								<!-- 페이지 번호 forEach -->
@@ -383,12 +384,13 @@
 						
 								<c:if test="${pagination.next}">
 									<li class="page-item">
-									<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+									<a class="page-link" href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">다음</a></li>
 								</c:if>
                             </ul>
                         </nav>
                     </div>
                 </div>
+                <!-- end 페이지 번호 선택 -->
                 
             </div>
         </div>

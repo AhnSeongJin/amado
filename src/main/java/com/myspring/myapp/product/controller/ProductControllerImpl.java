@@ -56,7 +56,7 @@ public class ProductControllerImpl implements ProductController {
 		String viewName = (String)request.getAttribute("viewName");
 		
 		//전체 상품 개수
-		int listCnt = productService.getBoardListCnt(); System.out.println("페이지에서 넘어온 값: "+page+" "+range);
+		int listCnt = productService.getBoardListCnt();
 		
 		//Pagination 객체 생성, 페이지당 상품 몇개씩 볼건지 값 받음 default=6
 		Pagination pagination = new Pagination(viewProduct);

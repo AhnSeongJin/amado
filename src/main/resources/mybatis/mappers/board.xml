@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.board">
+	<resultMap type="boardVO" id="boardResult">
+		<result property="boardSeq" column="boardSeq" />
+		<result property="boardTitle" column="boardTitle" />
+		<result property="boardContent" column="boardContent" />
+		<result property="id" column="id" />
+		<result property="regDate" column="regDate" />
+		<result property="replyCnt" column="replyCnt" />
+	</resultMap>
+	
+	<!-- 전체 게시글 수 -->
+	<select id="getBoardListCnt" resultType="int">
+		<![CDATA[
+			SELECT count(*) AS listCnt
+			FROM board
+		]]>
+	</select>
+	
+	<!-- 게시판 리스트 페이징 -->
+	<select id="getBoardList" resultMap="boardResult">
+		<![CDATA[
+			SELECT *
+			FROM board
+			ORDER BY board_seq DESC
+			LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
+	<!-- 게시판 글 보기 -->
+	<select id="getArticleRead" parameterType="int" resultMap="boardResult" resultType="boardVO">
+		<![CDATA[
+			SELECT *
+			FROM board
+			where board_seq = #{boardSeq}
+		]]>
+	</select>
+	
+	<!-- 게시글 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="int">
+		<![CDATA[
+			UPDATE board
+			SET viewCnt = viewCnt+1
+			where board_seq = #{boardSeq}
+		]]>
+	</update>
+	
+
+</mapper>

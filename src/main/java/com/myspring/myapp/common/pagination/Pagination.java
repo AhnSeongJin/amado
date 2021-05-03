@@ -131,11 +131,6 @@ public class Pagination {
 			this.endPage = this.pageCnt;
 			this.next = false;
 		}
-		System.out.println(range*rangeSize);
-		System.out.println("pagination:endPage= "+endPage);
-		System.out.println("pageCnt: "+pageCnt);
-		
-		System.out.println(this.toString());
 		
 	}
 
