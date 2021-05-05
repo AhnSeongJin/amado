@@ -16,6 +16,8 @@ public interface BoardDAO {
 	public BoardVO getArticleRead(int boardSeq) throws DataAccessException;
 	// 게시판 글 이동시 조회수 증가
 	public void updateViewCnt(int boardSeq) throws DataAccessException;
+	// 게시판 글 등록
+	public int insertArticle(BoardVO boardVO) throws DataAccessException;
 	
 
 	

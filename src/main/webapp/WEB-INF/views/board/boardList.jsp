@@ -145,14 +145,14 @@
 		                </thead>
 		                <tbody>
 		                	<c:choose>
-		                		<!-- 게시글 없는 경우 -->
 		                		<c:when test="${boardList == null }">
+		                			<!-- 게시글 없는 경우 -->
 			                		<tr>
 			                			<td colspan="4"><p align="center">등록된 글이 없습니다.</p></td>
 			                		</tr>
 			                	</c:when>
-			                	<!-- 게시글 있는 경우 -->
 			                	<c:otherwise>
+			                		<!-- 게시글 있는 경우 -->
 			                		<c:forEach var="boardList" items="${boardList }">
 			                			<tr>
 			                				<td>${boardList.boardSeq }</td>

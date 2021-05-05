@@ -38,6 +38,12 @@ public class BoardDAOImpl implements BoardDAO {
 	public void updateViewCnt(int boardSeq) throws DataAccessException {
 		sqlSession.update("mapper.board.updateReviewCnt", boardSeq);
 	}
+
+	// 게시판 글 등록
+	@Override
+	public int insertArticle(BoardVO boardVO) throws DataAccessException {
+		return sqlSession.insert("mapper.board.insertArticle", boardVO);
+	}
 	
 	
 

@@ -128,15 +128,13 @@
 		            
 		            	<h2>게시판 글쓰기</h2>
 		              
-						<form action="${contextPath }/board/addArticle" method="post">
-							<input type="hidden" name="bdGroup">
-							<input type="hidden" name="bdOrder">
-							<input type="hidden" name="bdIndent">
-							<input type="text" name="bdTitle" class="form-control mt-4 mb-2"
+						<form action="${contextPath }/board/addNewArticle.do" method="post">
+							<input type="hidden" name="id" value="${member.id }">
+							<input type="text" name="boardTitle" class="form-control mt-4 mb-2"
 								placeholder="제목을 입력해주세요." required
 							>
 							<div class="form-group">
-								<textarea class="form-control" rows="10" name="bdContent"
+								<textarea class="form-control" rows="10" name="boardContent"
 									placeholder="내용을 입력해주세요" required
 								></textarea>
 							</div>
@@ -230,39 +228,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### Footer Area End ##### -->
     
     <script>
-		//이전 버튼 이벤트
-		function fn_prev(page, range, rangeSize) {
-			var page = ((range - 2) * rangeSize) + 1;
-			var range = range - 1;		
-	
-			var url = "${contextPath}/board/boardList.do";
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-	
-			location.href = url;
-		}
-	
-	  	//페이지 번호 클릭
-		function fn_pagination(page, range, rangeSize, searchType, keyword) {
-			var url = "${contextPath}/board/boardList.do";
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-	
-			location.href = url;	
-		}
-	
-		//다음 버튼 이벤트
-		function fn_next(page, range, rangeSize) {
-			var page = parseInt((range * rangeSize)) + 1;
-			var range = parseInt(range) + 1;
-	
-			var url = "${contextPath}/board/boardList.do";
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;		
-	
-			location.href = url;
-		}
-    	
+		
     </script>
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->

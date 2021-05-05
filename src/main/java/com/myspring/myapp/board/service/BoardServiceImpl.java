@@ -36,6 +36,12 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateViewCnt(boardSeq);
 		return boardDAO.getArticleRead(boardSeq);
 	}
+
+	// 게시판 글 등록
+	@Override
+	public int addNewArticle(BoardVO boardVO) throws Exception {
+		return boardDAO.insertArticle(boardVO);
+	}
 	
 
 }

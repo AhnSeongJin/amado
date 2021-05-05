@@ -49,5 +49,12 @@
 		]]>
 	</update>
 	
+	<!-- 게시글 등록 -->
+	<insert id="insertArticle" parameterType="boardVO">
+		<![CDATA[
+			INSERT INTO board(board_title, board_content, id)
+			VALUES(#{boardTitle}, #{boardContent}, #{id})
+		]]>
+	</insert>
 
 </mapper>

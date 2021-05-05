@@ -30,9 +30,13 @@ public class MemberControllerImpl implements MemberController {
 	
 	@Override
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView login(@RequestParam(value= "action", required=false) String action, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
-		System.out.println("MemberController: "+viewName);
+		
+		//login 메소드에서 로그인후 action값 사용하기 위해
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;

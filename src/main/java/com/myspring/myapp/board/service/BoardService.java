@@ -12,6 +12,8 @@ public interface BoardService {
 	public List<BoardVO> getBoardList(Pagination pagination) throws Exception;
 	// 게시판 글 보기
 	public BoardVO getArticleRead(int boardSeq) throws Exception;
+	// 게시판 글 등록
+	public int addNewArticle(BoardVO boardVO) throws Exception;
 
 
 
