@@ -36,7 +36,7 @@ public class BoardDAOImpl implements BoardDAO {
 	// 게시글 조회수 증가
 	@Override
 	public void updateViewCnt(int boardSeq) throws DataAccessException {
-		sqlSession.update("mapper.board.updateReviewCnt", boardSeq);
+		sqlSession.update("mapper.board.updateViewCnt", boardSeq);
 	}
 
 	// 게시판 글 등록
