@@ -70,7 +70,7 @@
       height: 40px;
       font-size: 16px;
       background: #fbb710;
-      color: #fff;
+      color: #000;
       border-radius: 20px;
       cursor: pointer
     }

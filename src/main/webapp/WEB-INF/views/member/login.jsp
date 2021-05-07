@@ -32,7 +32,7 @@
       border-bottom: 2px solid #262626;
       outline: none;
       height: 40px;
-      color: #fff;
+      color: #000;
       background: transparent;
       font-size: 16px;
       padding-left: 20px;
