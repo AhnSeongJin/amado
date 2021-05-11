@@ -49,7 +49,7 @@
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
                 <c:if test="${isLogOn == true && member != null && member.id == 'admin' }">
-                	 <a href="${contextPath}/product/product-add.do" class="btn amado-btn mb-15">상품추가</a>
+                	 <a href="${contextPath}/product/product_add.do" class="btn amado-btn mb-15">상품추가</a>
                 </c:if>
                 <a href="#" class="btn amado-btn active">New this week</a>
             </div>

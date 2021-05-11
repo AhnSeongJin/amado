@@ -15,6 +15,7 @@
 		<typeAlias type="com.myspring.myapp.cart.vo.CartVO" alias="cartVO" />
 		<typeAlias type="com.myspring.myapp.common.pagination.Pagination" alias="pagination" />
 		<typeAlias type="com.myspring.myapp.board.vo.BoardVO" alias="boardVO" />
+		<typeAlias type="com.myspring.myapp.board.vo.ReplyVO" alias="replyVO" />
 	</typeAliases>
 	
 </configuration>

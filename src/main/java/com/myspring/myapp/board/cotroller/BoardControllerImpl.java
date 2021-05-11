@@ -59,13 +59,13 @@ public class BoardControllerImpl implements BoardController {
 			throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println("articleRead");
+		//System.out.println("articleRead");
 		//게시판 글 정보 가져오기
 		int boardSeq = Integer.parseInt(request.getParameter("boardSeq"));
 		BoardVO boardVO = boardService.getArticleRead(boardSeq);
 		
 		mav.addObject("boardVO", boardVO);
-		System.out.println("getArticleRead: "+boardVO);
+		//System.out.println("getArticleRead: "+boardVO);
 		return mav;
 	}
 	

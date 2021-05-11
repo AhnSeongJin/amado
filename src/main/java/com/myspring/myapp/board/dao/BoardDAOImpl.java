@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.myapp.board.vo.BoardVO;
+import com.myspring.myapp.board.vo.ReplyVO;
 import com.myspring.myapp.common.pagination.Pagination;
 
 @Repository("boardDAO")
@@ -43,6 +44,28 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int insertArticle(BoardVO boardVO) throws DataAccessException {
 		return sqlSession.insert("mapper.board.insertArticle", boardVO);
+	}
+
+	/* ====== 댓글 영역 ====== */
+	// 댓글 리스트 가져오기
+	@Override
+	public List<ReplyVO> getReplyList(int boardSeq) throws DataAccessException {
+		return sqlSession.selectList("mapper.board.getReplyList", boardSeq);
+	}
+
+	@Override
+	public int addReply(ReplyVO replyVO) throws DataAccessException {
+		return sqlSession.insert("mapper.board.addReply", replyVO);
+	}
+
+	@Override
+	public int updateReply(ReplyVO replyVO) throws DataAccessException {
+		return sqlSession.update("mapper.board.updateReply", replyVO);
+	}
+
+	@Override
+	public int deleteReply(int replySeq) throws DataAccessException {
+		return sqlSession.delete("mapper.board.deleteReply", replySeq);
 	}
 	
 	

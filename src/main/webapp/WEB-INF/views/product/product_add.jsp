@@ -50,7 +50,7 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-4">
-						<img id="preview" src="http://placehold.it/500x325" />
+						<img id="preview" src="https://www.dummyimage.com/460x571/d3d3d3/000" />
                     </div>
                     <div class="col-12 col-lg-8">
                         <div class="single_product_desc">

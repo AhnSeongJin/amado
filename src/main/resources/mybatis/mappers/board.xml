@@ -13,6 +13,15 @@
 		<result property="replyCnt" column="replyCnt" />
 	</resultMap>
 	
+	<resultMap type="replyVO" id="replyResult">
+		<result property="replySeq" column="replySeq" />
+		<result property="boardSeq" column="boardSeq" />
+		<result property="id" column="id" />
+		<result property="replyContent" column="replyContent" />
+		<result property="regDate" column="regDate" />
+		<result property="modDate" column="modDate" />
+	</resultMap>
+	
 	<!-- 전체 게시글 수 -->
 	<select id="getBoardListCnt" resultType="int">
 		<![CDATA[
@@ -22,10 +31,13 @@
 	</select>
 	
 	<!-- 게시판 리스트 페이징 -->
+	<!-- 스칼라 서브쿼리로 reply 테이블에서 댓글수 count, 테이블에 컬럼은 없지만 VO 필드는 존재 -->
 	<select id="getBoardList" resultMap="boardResult">
 		<![CDATA[
-			SELECT *
-			FROM board
+			SELECT *, (
+				SELECT count(*) FROM reply r WHERE b.board_seq = r.board_seq
+			) AS replyCnt
+			FROM board b
 			ORDER BY board_seq DESC
 			LIMIT #{startList}, #{listSize}
 		]]>
@@ -56,5 +68,43 @@
 			VALUES(#{boardTitle}, #{boardContent}, #{id})
 		]]>
 	</insert>
+	
+	<!-- =========== reply ============= -->
+	
+	<!-- 댓글 리스트 -->
+	<select id="getReplyList" resultType="replyVO">
+		<![CDATA[
+			SELECT *
+			FROM reply
+			WHERE board_seq = #{boardSeq}
+		]]>
+	</select>
+	
+	<!-- 댓글 저장 -->
+	<insert id="addReply" parameterType="replyVO">
+		<![CDATA[
+			INSERT INTO reply(board_seq, id, reply_content)
+			VALUES(#{boardSeq}, #{id}, #{replyContent})
+		]]>
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="replyVO">
+		<![CDATA[
+			UPDATE reply
+			SET reply_content = #{replyContent}, mod_date = #{modDate}
+			where reply_seq = #{replySeq}
+		]]>
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="int">
+		<![CDATA[
+			DELETE FROM reply
+			WHERE reply_seq = #{replySeq}
+		]]>
+	</delete>
+	
+	
 
 </mapper>

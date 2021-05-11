@@ -39,7 +39,7 @@
 	   <put-attribute name="body" value="/WEB-INF/views/product/product_details.jsp" />
 	</definition>
 	
-	<definition name="/product/addNewProduct" extends="baseLayout">
+	<definition name="/product/product_add" extends="baseLayout">
 	   <put-attribute name="title" value="Amado | Shop-상품등록" />
 	   <put-attribute name="body" value="/WEB-INF/views/product/product_add.jsp" />
 	</definition>

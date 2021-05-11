@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.myapp.board.dao.BoardDAO;
 import com.myspring.myapp.board.vo.BoardVO;
+import com.myspring.myapp.board.vo.ReplyVO;
 import com.myspring.myapp.common.pagination.Pagination;
 
 @Service("boardService")
@@ -41,6 +42,31 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int addNewArticle(BoardVO boardVO) throws Exception {
 		return boardDAO.insertArticle(boardVO);
+	}
+
+	/* ====== 댓글 영역 ====== */
+	// 댓글 리스트 가져오기
+	@Override
+	public List<ReplyVO> getReplyList(int boardSeq) throws Exception {
+		return boardDAO.getReplyList(boardSeq);
+	}
+
+	// 댓글 저장
+	@Override
+	public int addReply(ReplyVO replyVO) throws Exception {
+		return boardDAO.addReply(replyVO);
+	}
+
+	// 댓글 수정
+	@Override
+	public int updateReply(ReplyVO replyVO) throws Exception {
+		return boardDAO.updateReply(replyVO);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int deleteReply(int replySeq) throws Exception {
+		return boardDAO.deleteReply(replySeq);
 	}
 	
 

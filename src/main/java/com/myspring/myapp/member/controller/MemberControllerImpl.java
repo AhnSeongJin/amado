@@ -47,7 +47,7 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView login(@RequestParam Map<String, String> loginMap,
 			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("view에서 넘어온값:"+loginMap);
+		//System.out.println("view에서 넘어온값:"+loginMap);
 		memberVO = memberService.login(loginMap);
 		if(memberVO!= null && memberVO.getId()!=null){
 			HttpSession session=request.getSession();

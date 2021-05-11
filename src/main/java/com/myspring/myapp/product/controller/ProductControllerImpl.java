@@ -73,7 +73,7 @@ public class ProductControllerImpl implements ProductController {
 	}
 	
 	// 상품 등록 페이지
-	@RequestMapping(value = "/product-add.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/product_add.do", method = RequestMethod.GET)
 	public ModelAndView productAdd(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		ModelAndView mav = new ModelAndView(viewName);
@@ -120,7 +120,7 @@ public class ProductControllerImpl implements ProductController {
 
 			message = "<script>";
 			message += " alert('새글을 추가했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/product/product-add.do'; ";
+			message += " location.href='" + multipartRequest.getContextPath() + "/product/product_add.do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -129,7 +129,7 @@ public class ProductControllerImpl implements ProductController {
 
 			message = " <script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/product/product-add.do'; ";
+			message += " location.href='" + multipartRequest.getContextPath() + "/product/product_add.do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

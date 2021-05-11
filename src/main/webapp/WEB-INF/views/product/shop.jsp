@@ -159,14 +159,14 @@
 	                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
 	                        <div class="single-product-wrapper">
 	                            <!-- Product Image -->
-	                            <div class="product-img">
-	                                <a href="${contextPath }/product/product_details.do?product_code=${product.product_code }">
-		                                <img src="${contextPath}/download.do?product_code=${product.product_code }&imageFileName=${product.image_file_name}"
-										id="preview" alt="${product.product_name }">
-									</a>
-	                                <!-- Hover Thumb -->
-	                                <img class="hover-img" src="${contextPath}/download.do?product_code=${product.product_code }&imageFileName=${product.image_file_name}" alt="">
-	                            </div>
+	                            <a href="${contextPath }/product/product_details.do?product_code=${product.product_code }">
+		                            <div class="product-img">
+			                                <img src="${contextPath}/download.do?product_code=${product.product_code }&imageFileName=${product.image_file_name}"
+											id="preview" alt="${product.product_name }">
+		                                <!-- Hover Thumb -->
+		                                <img class="hover-img" src="${contextPath}/download.do?product_code=${product.product_code }&imageFileName=${product.image_file_name}" alt="">
+		                            </div>
+	                            </a>
 	
 	                            <!-- Product Description -->
 	                            <div class="product-description d-flex align-items-center justify-content-between">
