@@ -74,6 +74,20 @@ public class CartControllerImpl extends BaseController implements CartController
 			return "add_success";
 		}
 	}
+	@Override
+	@RequestMapping(value="/deleteProductInCart.do" ,method = RequestMethod.GET)
+	public String deleteProductInCart(@RequestParam("product_code") String product_code, HttpSession session) throws Exception{
+		// session에서 id값 받아온다.
+		memberVO=(MemberVO)session.getAttribute("member");
+		String id=memberVO.getId();
+		cartVO.setId(id);
+		cartVO.setProduct_code(product_code);
+		
+		cartService.deleteProductInCart(cartVO);
+		System.out.println("삭제완료");
+		
+		return "redirect:/cart/cart.do";
+	}
 	
 	@RequestMapping(value="/modifyCartQty.do" ,method = RequestMethod.POST)
 	public @ResponseBody String  modifyCartQty(@RequestParam("cart_id") int cart_id,
@@ -95,13 +109,5 @@ public class CartControllerImpl extends BaseController implements CartController
 		}
 		
 	}
-//	
-//	@RequestMapping(value="/removeCartGoods.do" ,method = RequestMethod.POST)
-//	public ModelAndView removeCartGoods(@RequestParam("cart_id") int cart_id,
-//			                          HttpServletRequest request, HttpServletResponse response)  throws Exception{
-//		ModelAndView mav=new ModelAndView();
-//		cartService.removeCartGoods(cart_id);
-//		mav.setViewName("redirect:/cart/myCartList.do");
-//		return mav;
-//	}
+
 }

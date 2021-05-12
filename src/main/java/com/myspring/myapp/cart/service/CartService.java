@@ -11,5 +11,5 @@ public interface CartService {
 	public boolean findCartProduct(CartVO cartVO) throws Exception;
 	public void addProductInCart(CartVO cartVO) throws Exception;
 	public boolean modifyCartQty(CartVO cartVO) throws Exception;
-//	public void removeCartGoods(int cart_id) throws Exception;
+	public void deleteProductInCart(CartVO cartVO) throws Exception;
 }

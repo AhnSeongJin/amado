@@ -24,42 +24,54 @@
                         </div>
 
                         <div class="cart-table clearfix">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<c:forEach var="cart" items="${cartMap.myCartList }" varStatus="cnt">
-                                		<c:set var="product" value="${cartMap.myProductList[cnt.index] }" />
-                                		<tr>
-	                                        <td class="cart_product_img">
-	                                            <a href="#"><img src="${contextPath}/download.do?product_code=${product.product_code }&imageFileName=${product.image_file_name}" alt="Product"></a>
-	                                        </td>
-	                                        <td class="cart_product_desc">
-	                                            <h5>${product.product_name }</h5>
-	                                        </td>
-	                                        <td class="price">
-	                                            <span>$<span id="price${cnt.count }">${product.product_price*cart.cart_product_qty }</span></span>
-	                                        </td>
-	                                        <td class="qty">
-	                                            <div class="qty-btn d-flex">
-	                                                <p>Qty</p>
-	                                                <div class="quantity">
-	                                                    <span class="qty-minus" onclick="qty_minus(${cart.cart_id }, ${cnt.count }, ${product.product_price*cart.cart_product_qty })"><i class="fa fa-minus" aria-hidden="true"></i></span>
-	                                                    <input type="number" class="qty-text" id="qty${cnt.count }" step="1" min="1" max="300" name="quantity" value="${cart.cart_product_qty }" onchange="change(${cart.cart_id }, this.value, ${product.product_price*cart.cart_product_qty })">
-	                                                    <span class="qty-plus" onclick="qty_plus(${cart.cart_id }, ${cnt.count }, ${product.product_price*cart.cart_product_qty })"><i class="fa fa-plus" aria-hidden="true"></i></span>
-	                                                </div>
-	                                            </div>
-	                                        </td>
-	                                    </tr>
-                                	</c:forEach>
-                                </tbody>
-                            </table>
+                        	<c:choose>
+                          		<c:when test="${cartMap != null && isLogOn == true }">                          			
+                          			<table class="table table-responsive text-center">
+		                                <thead>
+		                                    <tr>
+		                                        <th></th>
+		                                        <th>Name</th>
+		                                        <th>Price</th>
+		                                        <th>Quantity</th>
+		                                    </tr>
+		                                </thead>
+                                		<tbody>
+                                			<c:forEach var="cart" items="${cartMap.myCartList }" varStatus="cnt">
+		                                		<c:set var="product" value="${cartMap.myProductList[cnt.index] }" />
+		                                		<tr>
+			                                        <td class="cart_product_img">
+			                                            <a href="#"><img src="${contextPath}/download.do?product_code=${product.product_code }&imageFileName=${product.image_file_name}" alt="Product"></a>
+			                                        </td>
+			                                        <td class="cart_product_desc">
+			                                            <h5>${product.product_name }</h5>
+			                                        </td>
+			                                        <td class="price">
+			                                            <span>$<span id="price${cnt.count }">${product.product_price*cart.cart_product_qty }</span></span>
+			                                        </td>
+			                                        <td class="qty">
+			                                            <div class="qty-btn d-flex row justify-content-center">
+			                                                <p>Qty</p>
+			                                                <div class="quantity">
+			                                                    <span class="qty-minus" onclick="qty_minus(${cart.cart_id }, ${cnt.count }, ${product.product_price*cart.cart_product_qty })"><i class="fa fa-minus" aria-hidden="true"></i></span>
+			                                                    <input type="number" class="qty-text" id="qty${cnt.count }" step="1" min="1" max="300" name="quantity" value="${cart.cart_product_qty }" onchange="change(${cart.cart_id }, this.value, ${product.product_price*cart.cart_product_qty })">
+			                                                    <span class="qty-plus" onclick="qty_plus(${cart.cart_id }, ${cnt.count }, ${product.product_price*cart.cart_product_qty })"><i class="fa fa-plus" aria-hidden="true"></i></span>
+			                                                </div>
+			                                            </div>
+			                                            <div class="row justify-content-center">
+			                                            	<button class="btn" onclick="btn_delete('${product.product_code}');">삭제</button>
+			                                            </div>
+			                                        </td>
+			                                    </tr>
+		                                	</c:forEach>
+	                                	</tbody>
+		                            </table>
+                          		</c:when>
+                          		<c:otherwise>
+		                            <div>
+                          				<h3 class="text-center mt-5">장바구니에 상품이 없습니다.</h3>
+                          			</div>
+                           		</c:otherwise>
+                           	</c:choose>
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">
@@ -94,7 +106,14 @@
     		total_price += arr_total.pop(); //값 더하면서 배열 요소 삭제
     	}
     	console.log("total_price:", total_price, "arr_total:", arr_total);
-    	$('#total, #subtotal').text('$'+total_price);; //최초 DB값을 계산한 총 금액
+    	
+    	// 페이지 로딩시
+    	document.addEventListener("DOMContentLoaded", function(){
+    		if(${isLogOn == true}){
+    			//최초 DB값을 계산한 총 금액 넣기
+        		$('#total, #subtotal').text('$'+total_price);
+    		}
+    	});
     	
     	function change(cart_id, qty, price){
     		//cart_id, qty : DB변경할 쿼리문에 들어갈 값
@@ -175,6 +194,16 @@
 			change(cart_id, effect.value, price); //effect.value: 변경된 수량을 매개변수로 사용
 		}
 		// end 버튼 수량 변경
+		
+		/* 카트 상품 삭제 */
+		function btn_delete(product_code) {
+			console.log("삭제버튼클릭");
+			// 스크립트 확인/취소 창
+			if(confirm("해당 상품을 삭제하시겠습니까?")){
+				location.href="${contextPath}/cart/deleteProductInCart.do?product_code="+product_code;
+			}
+		}
+		
 		
     </script>
 

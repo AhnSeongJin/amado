@@ -32,16 +32,6 @@
 		]]>
 	</select>
 	
-<!-- 	<select id="selectProductList" resultMap="joinResult" parameterType="java.util.List">
-      <![CDATA[
-			select c.*, p.image_file_name
-			from cart as c left join product as p
-			on c.product_code = p.product_code
-			where c.id = #{id}
-			order by c.cart_id;
-      ]]>
-	</select> -->
-	
 	<select id="selectProductList" resultMap="productResult" parameterType="java.util.List">
       <![CDATA[
 			select c.*, p.image_file_name, p.product_name, p.product_price
@@ -51,19 +41,6 @@
 			order by c.cart_id;
       ]]>
 	</select>
-	
-	<!-- <select id="selectproductList" resultMap="cartResult" parameterType="java.util.Map">
-      <![CDATA[
-          select g.*,d.fileName from t_shopping_goods g, t_goods_detail_image d
-          where g.goods_id=d.goods_id
-          and d.filetype='main_image'
-           and g.goods_id in
-      ]]>
-		<foreach item="item" collection="list" open="(" separator="," close=")">
-			#{item.goods_id}
-		</foreach>
-		order by g.goods_creDate desc
-	</select> -->
 	
 	<!-- 카트에 상품 중복확인 중복O=true, 중복X=false -->
 	<!-- oracle: decode / mysql: if, case when then -->
@@ -104,6 +81,14 @@
 			where id = #{id} and cart_id = #{cart_id}
 		]]>
 	</update>
+	
+	<delete id="deleteProductInCart" parameterType="cartVO">
+		<![CDATA[
+			DELETE FROM cart
+			WHERE id = #{id} and product_code = #{product_code}
+		]]>
+	</delete>
+	
 	
 
 </mapper>
