@@ -25,8 +25,6 @@
   - Eclipse
   - MySQL Workbench
 
-## 클래스 다이어그램
-
 ## 다이어그램
 ### Class Diagram
 ![ClassDiagram](https://user-images.githubusercontent.com/70364742/118136999-a939aa00-b43f-11eb-8214-e95361b2bd2e.png)
