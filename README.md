@@ -27,7 +27,7 @@
 
 ## 다이어그램
 ### Class Diagram
-<img src="https://user-images.githubusercontent.com/70364742/118136999-a939aa00-b43f-11eb-8214-e95361b2bd2e.png" width="100%">
+<img src="https://user-images.githubusercontent.com/70364742/118136999-a939aa00-b43f-11eb-8214-e95361b2bd2e.png" width="5045">
 
 ### ER-Diagram
 ![ER-Diagram](https://user-images.githubusercontent.com/70364742/118137005-ab9c0400-b43f-11eb-9316-6b558ecc3a39.PNG)
