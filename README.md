@@ -29,8 +29,10 @@
 
 ## 다이어그램
 ### Class Diagram
+![ClassDiagram](https://user-images.githubusercontent.com/70364742/118136999-a939aa00-b43f-11eb-8214-e95361b2bd2e.png)
 
 ### ER-Diagram
+![ER-Diagram](https://user-images.githubusercontent.com/70364742/118137005-ab9c0400-b43f-11eb-9316-6b558ecc3a39.PNG)
 
 ### 디렉토리 구조
 ```
@@ -296,13 +298,13 @@
   - [회원가입](#회원가입)
   - [PRODUCT](#PRODUCT)
     - [SHOP](#shop)
+    - [상품 상세보기](#상품-상세보기)
     - [상품등록](#상품등록)
   - [CART](#cart)
   - [BOARD](#board)
     - [글 목록](#글-목록)
-    - [글 보기](#글-보기)
     - [글 쓰기](#글-쓰기)
-
+    - [글 보기](#글-보기)
 
 ### index
 ![index](https://user-images.githubusercontent.com/70364742/118134712-32031680-b43d-11eb-822a-b6a5895a78d6.png)
@@ -328,32 +330,37 @@
   - 로그인: 카트 아이콘 클릭시 Ajax 사용하여 카트에 상품 추가후 modal 이용한 팝업창 생성.  
   - 비로그인: 로그인후 가능하다는 modal 팝업창 생성
 
+#### 상품 상세보기
+![productDetails](https://user-images.githubusercontent.com/70364742/118136290-ec474d80-b43e-11eb-8a0b-902f7cf69a85.png)
+- 상품 카트에 추가하기
+  - 로그인: 수량 선택후 버튼 클릭시 Ajax 사용하여 카트에 상품 추가후 modal 이용한 팝업창 생성.  
+  - 비로그인: 로그인후 가능하다는 modal 팝업창 생성
+
 #### 상품등록
 ![addProduct01](https://user-images.githubusercontent.com/70364742/118135010-7d1d2980-b43d-11eb-8294-e94666878b88.png)
 ![addProduct02](https://user-images.githubusercontent.com/70364742/118135020-7f7f8380-b43d-11eb-8bfb-218fcdd1f51a.png)
-
-
 - 관리자로 로그인한 경우에만 보이는 메뉴를 통해 이동
 - 이미지 파일 선택하면 자바스크립트를 통해 filereader 사용하여 선택한 이미지를 보여준다.
 - 이미지의 경우 upload 메소드를 이용하여 지정해 놓은 저장소에 저장한다.
 - 이미지 사용은 공통 기능에서 fileDownloadController의 메소드를 통해 이미지를 받는다.
 
 ### CART
-
+![cart01](https://user-images.githubusercontent.com/70364742/118135385-edc44600-b43d-11eb-96a4-cf4ed92978c6.png)
+![cart02](https://user-images.githubusercontent.com/70364742/118135402-f0bf3680-b43d-11eb-993a-491162ac63bf.png)
 - 페이지 로딩할 때 각 상품의 금액을 더해서 총 금액을 계산하여 변경
 - 상품 삭제시 팝업창으로 삭제여부 한번 더 확인후 상품 코드값 전달하고 세션에서 아이디 받아서 해당 상품 삭제
 - 수량 증가/감소는 각각 기호 아이콘에 onclick 이벤트로 현재 값에서 증가/감소 후, change() 메소드에 매개변수 전달하여 Ajax 사용하여 변경하고, 총 금액을 다시 계산하여 변경
 
 ### BOARD
 #### 글 목록
-!이미지
+![boardList](https://user-images.githubusercontent.com/70364742/118135537-1fd5a800-b43e-11eb-9fa9-c13be5d49ee3.png)
 - 글 제목옆에 댓글 수 표시
 - 해당 글 이동시 조회수 증가
-!팝업창 이미지
-- 로그인 안한 경우 로그인 화면으로 이동. 로그인 완료 후 같이 전달한 페이지(action)값으로 글 쓰기 페이지로 이동
+- 글쓰기 버튼 클릭시 로그인 안한 경우 로그인 화면으로 이동. 로그인 완료 후 같이 전달한 페이지(action)값으로 글 쓰기 페이지로 이동
 - pagination 클래스 사용하여 페이징 처리
 
 #### 글 보기
+![boardArticleRead](https://user-images.githubusercontent.com/70364742/118136467-1c8eec00-b43f-11eb-97c8-cbe3c24ecc00.png)
 - 댓글 CRUD  
 수정/삭제 버튼은 본인의 것만 표시.  
 Ajax를 통한 CRUD
@@ -363,6 +370,7 @@ Ajax를 통한 CRUD
   - 삭제: 댓글 번호 전달하여 해당 글 삭제
 
 #### 글 쓰기
+![boardArticleForm](https://user-images.githubusercontent.com/70364742/118136868-8a3b1800-b43f-11eb-8758-e73985a30f25.png)
 - form에서 아이디, 글 제목, 글 내용 전달하여 글 저장.
 
 
