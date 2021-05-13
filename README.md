@@ -305,20 +305,22 @@
 
 
 ### index
-
+![index](https://user-images.githubusercontent.com/70364742/118134712-32031680-b43d-11eb-822a-b6a5895a78d6.png)
 - sidebar, footer 고정
 - 관리자(admin)로 로그인시 상품등록 항목 추가
 - 로그인한 아이디 표시
 - 각 상품 이미지 클릭시 SHOP으로 이동
 
 ### 로그인
+![login](https://user-images.githubusercontent.com/70364742/118134782-42b38c80-b43d-11eb-9747-5f78d0445683.png)
 - 로그인 완료하면 세션에 로그인 정보와 로그인 여부값 저장
 
 ### 회원가입
+![register](https://user-images.githubusercontent.com/70364742/118134819-4cd58b00-b43d-11eb-9e46-961f5bfd560c.png)
 
 ### PRODUCT
 #### SHOP
-
+![shop](https://user-images.githubusercontent.com/70364742/118134901-62e34b80-b43d-11eb-823e-36a7117d62d7.png)
 - View에서 선택한 수 만큼 상품리스트 출력
 - 총 상품 개수와 View에 선택된 수에 따른 pagnation 클래스를 사용한 페이징 처리.
 - 상품 이미지, 이름 클릭시 해당 상품 상세보기 화면으로 이동  
@@ -327,6 +329,9 @@
   - 비로그인: 로그인후 가능하다는 modal 팝업창 생성
 
 #### 상품등록
+![addProduct01](https://user-images.githubusercontent.com/70364742/118135010-7d1d2980-b43d-11eb-8294-e94666878b88.png)
+![addProduct02](https://user-images.githubusercontent.com/70364742/118135020-7f7f8380-b43d-11eb-8bfb-218fcdd1f51a.png)
+
 
 - 관리자로 로그인한 경우에만 보이는 메뉴를 통해 이동
 - 이미지 파일 선택하면 자바스크립트를 통해 filereader 사용하여 선택한 이미지를 보여준다.
